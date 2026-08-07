@@ -756,7 +756,8 @@
       this.keys = this.input.keyboard.addKeys('A,D,F,J,R');
       this.input.keyboard.on('keydown-F', this.onFireKeyDown, this);
       this.input.keyboard.on('keydown-J', this.onFireKeyDown, this);
-      this.input.keyboard.on('keydown-SPACE', this.onJumpKeyDown, this);
+      this.input.keyboard.on('keydown-SPACE', this.onFireKeyDown, this);
+      this.input.keyboard.on('keydown-UP', this.onJumpKeyDown, this);
     }
 
     onFireKeyDown() {
@@ -801,11 +802,7 @@
         this.player.body.setSize(26, crouch ? 32 : 52).setOffset(19, crouch ? 42 : 22);
       }
 
-      if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && this.player.body.blocked.down && !crouch) {
-        this.player.setVelocityY(-JUMP_SPEED);
-      }
-
-      const firing = this.keys.F.isDown || this.keys.J.isDown;
+      const firing = this.keys.F.isDown || this.keys.J.isDown || this.cursors.space.isDown;
       if (firing && this.time.now >= this.nextShotAt) {
         this.fireWeapon();
       }
@@ -1241,7 +1238,7 @@
       const shade = this.add.rectangle(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT, 0x02070b, 0.78);
       const title = this.add.text(WIDTH / 2, 132, 'CONTRA // RED FALCON', { fontFamily: 'monospace', fontSize: '42px', color: '#f7e7ad', fontStyle: 'bold' }).setOrigin(0.5);
       const sub = this.add.text(WIDTH / 2, 188, 'FOUR-LEVEL RUN-AND-GUN CAMPAIGN', { fontFamily: 'monospace', fontSize: '15px', color: '#63e6b4' }).setOrigin(0.5);
-      const controls = this.add.text(WIDTH / 2, 294, 'ARROWS / A D  MOVE     SPACE  JUMP\nF / J  FIRE     DOWN  DUCK + AIM DOWN', { fontFamily: 'monospace', fontSize: '17px', color: '#b8d9cf', align: 'center', lineSpacing: 12 }).setOrigin(0.5);
+      const controls = this.add.text(WIDTH / 2, 294, 'ARROWS  MOVE     UP  JUMP + AIM UP\nSPACE  FIRE     DOWN  DUCK + AIM DOWN', { fontFamily: 'monospace', fontSize: '17px', color: '#b8d9cf', align: 'center', lineSpacing: 12 }).setOrigin(0.5);
       const prompt = this.add.text(WIDTH / 2, 440, 'PRESS ANY KEY TO DEPLOY', { fontFamily: 'monospace', fontSize: '18px', color: '#ffcb66', fontStyle: 'bold' }).setOrigin(0.5);
       this.startOverlay.add([shade, title, sub, controls, prompt]);
       this.startOverlay.setInteractive(new Phaser.Geom.Rectangle(0, 0, WIDTH, HEIGHT), Phaser.Geom.Rectangle.Contains);

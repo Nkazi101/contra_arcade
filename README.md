@@ -20,8 +20,8 @@ Upload this folder to any static host such as GitHub Pages, Netlify, Vercel, Clo
 
 ## Controls
 
-- Arrow keys or A/D: move
-- Space: jump
-- Down: crouch and aim down while firing
-- F or J: fire
+- Left/Right arrows or A/D: move
+- Up arrow: jump and aim up while firing
+- Down arrow: crouch and aim down while firing
+- Space, F, or J: fire
 - R: restart after win or game over
